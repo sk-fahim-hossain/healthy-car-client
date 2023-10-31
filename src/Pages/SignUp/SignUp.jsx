@@ -14,6 +14,9 @@ const SignUp = () => {
         createUser(email,password)
         .then(result =>{
             console.log(result.user)
+            if(result.user.email){
+                alert('Sign Up SuccessFully..!')
+            }
         })
         .catch(error => console.log(error.message))
         form.reset()
