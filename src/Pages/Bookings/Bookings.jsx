@@ -6,18 +6,27 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([])
     const { user } = useContext(Authcontext)
 
-    const url = `http://localhost:5000/bookings?email=${user.email}`;
+    const url = `https://healthy-car-server-fghegtfet-fahim-hossains-projects.vercel.app/bookings?email=${user.email}`;
 
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('car-access-token')}`
+            }
+        })
             .then(res => res.json())
-            .then(data => setBookings(data))
+            .then(data => {
+                if(!data.error){
+                    setBookings(data)
+                }
+            })
     }, [url])
 
     const handleDelete = id => {
         const proceed = confirm('Are you sure you want to delete this booking?')
         if (proceed) {
-            fetch(`http://localhost:5000/bookings/${id}`, {
+            fetch(`https://healthy-car-server-fghegtfet-fahim-hossains-projects.vercel.app/bookings/${id}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())
@@ -33,7 +42,7 @@ const Bookings = () => {
     }
 
     const handleBookingConfirm = id => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://healthy-car-server-fghegtfet-fahim-hossains-projects.vercel.app/bookings/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

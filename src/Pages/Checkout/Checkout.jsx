@@ -24,7 +24,7 @@ const Checkout = () => {
         }
         console.log(booking)
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://healthy-car-server-fghegtfet-fahim-hossains-projects.vercel.app/bookings', {
             method:'POST',
             headers:{
                 'content-type': 'application/json'
@@ -40,9 +40,9 @@ const Checkout = () => {
         })
     }
     return (
-        <div>
+        <div className="my-12">
             <h2 className="text-center text-4xl my-4">Book Service: {serviceData.title}</h2>
-            <div className="hero min-h-screen bg-base-200">
+            <div className="hero bg-base-200 w-3/4 mx-auto">
                 <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
                     <form onSubmit={handleCheckoutService} className="card-body">
                         <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
